@@ -12,14 +12,10 @@
         tool:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.maplocation.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tool:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_device"
+        android:name="com.example.maplocation.ui.device.DeviceFragment"
+        android:label="@string/menu_device"
+        tool:layout="@layout/fragment_device" />
 
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.maplocation.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tool:layout="@layout/fragment_slideshow" />
+
 </navigation>

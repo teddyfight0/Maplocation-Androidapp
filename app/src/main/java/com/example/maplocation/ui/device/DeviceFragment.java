@@ -1,31 +1,29 @@
-package com.example.maplocation.ui.slideshow;
+package com.example.maplocation.ui.device;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import com.example.maplocation.databinding.FragmentDeviceBinding;
 
-import com.example.maplocation.databinding.FragmentSlideshowBinding;
-
-public class SlideshowFragment extends Fragment {
-
-    private FragmentSlideshowBinding binding;
+public class DeviceFragment extends Fragment {
+    private FragmentDeviceBinding binding;
+    private DeviceViewModel deviceViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        deviceViewModel = new ViewModelProvider(this).get(DeviceViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentDeviceBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textDevice;
+        deviceViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
         return root;
     }
 
