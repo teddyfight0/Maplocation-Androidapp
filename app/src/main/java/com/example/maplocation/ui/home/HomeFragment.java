@@ -11,6 +11,7 @@ import com.tencent.tencentmap.mapsdk.maps.CameraUpdate;
 import com.tencent.tencentmap.mapsdk.maps.CameraUpdateFactory;
 import com.tencent.tencentmap.mapsdk.maps.MapView;
 import com.tencent.tencentmap.mapsdk.maps.TencentMap;
+import com.tencent.tencentmap.mapsdk.maps.TencentMapInitializer;
 import com.tencent.tencentmap.mapsdk.maps.model.LatLng;
 import com.example.maplocation.databinding.FragmentHomeBinding;
 
@@ -24,23 +25,32 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        return binding.getRoot();
+    }
 
-        // 初始化地图
-        mapView = binding.mapView;  // 使用与layout中一致的ID
-        if (mapView != null) {
-            // 不需要调用onCreate，MapView会自动处理生命周期
-            mTencentMap = mapView.getMap();
+    @Override
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // 在初始化地图前设置隐私协议
+        TencentMapInitializer.setAgreePrivacy(true);
+        initMap();
+    }
 
-            // 设置地图中心点
-            if (mTencentMap != null) {
-                LatLng latLng = new LatLng(39.984059, 116.307621);
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(latLng);
-                mTencentMap.moveCamera(cameraUpdate);
-            }
+    private void initMap() {
+        mapView = binding.mapView;
+
+        // 在主线程初始化地图
+        mTencentMap = mapView.getMap();
+        if (mTencentMap != null) {
+            LatLng latLng = new LatLng(39.984059, 116.307621);
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 15);
+            mTencentMap.moveCamera(cameraUpdate);
+
+            // 设置地图基本参数
+            mTencentMap.setMapType(TencentMap.MAP_TYPE_NORMAL);
+            mTencentMap.getUiSettings().setZoomGesturesEnabled(true);
+            mTencentMap.getUiSettings().setScrollGesturesEnabled(true);
         }
-
-        return root;
     }
 
     @Override

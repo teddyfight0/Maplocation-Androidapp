@@ -33,7 +33,7 @@ android {
 
 dependencies {
     // 腾讯地图 SDK
-    implementation 'com.tencent.map:tencent-map-vector-sdk:4.3.4'
+    implementation 'com.tencent.map:tencent-map-vector-sdk:5.8.1'
 
     // AndroidX 核心依赖 - 统一使用 2.7.0 版本
     def lifecycle_version = "2.7.0"
